@@ -73,4 +73,7 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo:
+    github: https://github.com/zvc888/zvc888.github.io.git,master
+  message: update in {{now("YYYY-MM-DD HH:mm")}}
