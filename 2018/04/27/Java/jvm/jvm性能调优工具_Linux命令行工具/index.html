@@ -1,0 +1,686 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Java 性能调优工具（Linux命令行工具） | hang on, that&#39;s right</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="zvc">
+    
+
+    
+    <meta name="description" content="#Java 性能调优工具（Linux命令行工具）
+
+来源 《Java程序性能优化》第六章
+
+top命令
+top命令的输出可以分为两个部分：前半部分是系统统计信息，后半部分是进程信息。
+在统计信息中，第1行是任务队列消息，它的结果等同于uptime命令。从做到右一次表示：系统当前时间、系统运行时间、当前登录用户数。最后的load average表示系统的平均负载，即任务队列的平均长度，这3个值分别表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 性能调优工具（Linux命令行工具）">
+<meta property="og:url" content="http://lovemiffy.cn/2018/04/27/Java/jvm/jvm性能调优工具_Linux命令行工具/index.html">
+<meta property="og:site_name" content="hang on, that's right">
+<meta property="og:description" content="#Java 性能调优工具（Linux命令行工具）
+
+来源 《Java程序性能优化》第六章
+
+top命令
+top命令的输出可以分为两个部分：前半部分是系统统计信息，后半部分是进程信息。
+在统计信息中，第1行是任务队列消息，它的结果等同于uptime命令。从做到右一次表示：系统当前时间、系统运行时间、当前登录用户数。最后的load average表示系统的平均负载，即任务队列的平均长度，这3个值分别表">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/top.png">
+<meta property="og:updated_time" content="2018-04-29T15:49:11.791Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java 性能调优工具（Linux命令行工具）">
+<meta name="twitter:description" content="#Java 性能调优工具（Linux命令行工具）
+
+来源 《Java程序性能优化》第六章
+
+top命令
+top命令的输出可以分为两个部分：前半部分是系统统计信息，后半部分是进程信息。
+在统计信息中，第1行是任务队列消息，它的结果等同于uptime命令。从做到右一次表示：系统当前时间、系统运行时间、当前登录用户数。最后的load average表示系统的平均负载，即任务队列的平均长度，这3个值分别表">
+<meta name="twitter:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/top.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="hang on, that&#39;s right" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/logo.png">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="hang on, that&#39;s right" title="hang on, that&#39;s right"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="hang on, that&#39;s right">hang on, that&#39;s right</a></h1>
+				<h2 class="blog-motto">blog</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/27/Java/jvm/jvm性能调优工具_Linux命令行工具/" title="Java 性能调优工具（Linux命令行工具）" itemprop="url">Java 性能调优工具（Linux命令行工具）</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-27T08:41:57.679Z" itemprop="datePublished"> 发表于 2018-04-27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#top命令"><span class="toc-number">1.</span> <span class="toc-text">top命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sar命令"><span class="toc-number">2.</span> <span class="toc-text">sar命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vmstat命令可以查看内心、交互分区、I-O操作、上下文切换、时钟中断以及CPu的使用情况"><span class="toc-number">3.</span> <span class="toc-text">vmstat命令可以查看内心、交互分区、I/O操作、上下文切换、时钟中断以及CPu的使用情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iostat命令可以快速定位系统是否缠上了大量的I-O操作"><span class="toc-number">4.</span> <span class="toc-text">iostat命令可以快速定位系统是否缠上了大量的I/O操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pidstat工具-不仅可以监控进程的新能情况，也可以监视线程的性能情况"><span class="toc-number">5.</span> <span class="toc-text">pidstat工具 不仅可以监控进程的新能情况，也可以监视线程的性能情况</span></a></li></ol>
+		
+		</div>
+		
+		<p>#Java 性能调优工具（Linux命令行工具）</p>
+<blockquote>
+<p>来源 《Java程序性能优化》第六章</p>
+</blockquote>
+<h2 id="top命令"><a href="#top命令" class="headerlink" title="top命令"></a>top命令</h2><p><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/top.png" alt="top命令"></p>
+<p>top命令的输出可以分为两个部分：前半部分是系统统计信息，后半部分是进程信息。</p>
+<p>在统计信息中，第1行是任务队列消息，它的结果等同于uptime命令。从做到右一次表示：系统当前时间、系统运行时间、当前登录用户数。最后的load average表示系统的平均负载，即任务队列的平均长度，这3个值分别表示1分钟、5分钟、15分钟到现在的平均值。</p>
+<p>第2行是进程统计信息，分别有正则运行的进程数、睡眠进程数、停止的进程数、僵尸进程数。<br>第3行是cpu统计信息，us表示用户控件CPU占用率、sy表示内核空间CPU占用率、ni表示用户进程空间改变过优先级的进程CPU占用率、id表示空闲CPU占用率、wa表示等待输入输出的CPU时间百分比、hi表示硬件中断请求、si表示软件中断请求。在Mem行中，从左到右，依次表示物理内存总量、已使用的物理内存、空闲物理内存、内核缓冲使用了。Swap行依次表示交换区总量、空闲交换区大小、缓冲交换区大小。</p>
+<p>top命令的第2部分是进程信息区，显示了系统内各个进程的资源使用情况。</p>
+<ul>
+<li>PID：进程id</li>
+<li>PPID：父进程id</li>
+<li>USER：进程所有者的用户id</li>
+<li>PR：优先级</li>
+<li>NI：nice值。负值表示高优先级，正值表示低优先级</li>
+<li>VIRT：进程使用的虚拟内存总量，单位KB。VIRT=SWAP+RES</li>
+<li>SWAP：进程使用的虚拟内存中被换出的大小，单位KB</li>
+<li>RES：进程使用的、未被换出的物理内存大小，单位KB。RES=CODE+DATA</li>
+<li>CODE：可执行代码占用的物理内存大小，单位KB</li>
+<li>DATA：可执行代码以外的部分（数据段+栈）占用的物理内存大小，单位KB</li>
+<li>SHR：共享内存大小，单位KB</li>
+<li>S：进程状态。D表示不可中断的睡眠状态；R表示运行；S表示睡眠；T表示跟踪/停止；Z表示僵尸进程</li>
+<li>%CPU：上次跟心到现在的CPU时间占用百分比</li>
+<li>%MEM：进程使用的物理内存百分比</li>
+<li>TIME+：进程使用的PUC时间总计，单位1/100秒</li>
+<li>COMMAND：命令名/命令行</li>
+<li>WCHAN：若该进程在睡眠，则显示睡眠中的系统函数名</li>
+</ul>
+<p>top命令下，按下f键可以进行列的选择，使用o键可以更改列的显示顺序。此外，top命令还有一些使用的交互指令：</p>
+<ul>
+<li>h：显示帮助信息</li>
+<li>k：终止一个进程</li>
+<li>q：退出程序</li>
+<li>c：切换显示命令名称和完整命令行</li>
+<li>M：根据主流内存大小进行排序</li>
+<li>P：根据CPU使用百分比大小进行排序</li>
+<li>T：根据时间/累计时间进行排序</li>
+<li>数字1：显示所有CPU负载情况。</li>
+</ul>
+<h2 id="sar命令"><a href="#sar命令" class="headerlink" title="sar命令"></a>sar命令</h2><blockquote>
+<p>sar命令可以查看I/O信息、内存信息以及CPU使用情况。</p>
+</blockquote>
+<pre><code>sar [options] [&lt;interval&gt; [&lt;count&gt;] ]
+</code></pre><p>interval和count分别表示采样周期和采样数量。options选项可以指定sar命令对那些性能数据进行采样</p>
+<ul>
+<li>-A：所有报告的综合</li>
+<li>-u：CPU利用率</li>
+<li>-d：硬盘使用报告</li>
+<li>-b：I/O的情况</li>
+<li>-q：查看队列长度</li>
+<li>-r：内存使用统计信息</li>
+<li>-n：网络信息统计</li>
+<li>-o：采样结果输出到文件</li>
+</ul>
+<h2 id="vmstat命令可以查看内心、交互分区、I-O操作、上下文切换、时钟中断以及CPu的使用情况"><a href="#vmstat命令可以查看内心、交互分区、I-O操作、上下文切换、时钟中断以及CPu的使用情况" class="headerlink" title="vmstat命令可以查看内心、交互分区、I/O操作、上下文切换、时钟中断以及CPu的使用情况"></a>vmstat命令可以查看内心、交互分区、I/O操作、上下文切换、时钟中断以及CPu的使用情况</h2><p>待补充</p>
+<h2 id="iostat命令可以快速定位系统是否缠上了大量的I-O操作"><a href="#iostat命令可以快速定位系统是否缠上了大量的I-O操作" class="headerlink" title="iostat命令可以快速定位系统是否缠上了大量的I/O操作"></a>iostat命令可以快速定位系统是否缠上了大量的I/O操作</h2><p>待补充</p>
+<h2 id="pidstat工具-不仅可以监控进程的新能情况，也可以监视线程的性能情况"><a href="#pidstat工具-不仅可以监控进程的新能情况，也可以监视线程的性能情况" class="headerlink" title="pidstat工具 不仅可以监控进程的新能情况，也可以监视线程的性能情况"></a>pidstat工具 不仅可以监控进程的新能情况，也可以监视线程的性能情况</h2><p>待补充</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>►<a class="article-category-link" href="/categories/Java/Linux/">Linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java/">Java</a><a href="/tags/JAVA性能调优/">JAVA性能调优</a><a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://lovemiffy.cn/2018/04/27/Java/jvm/jvm性能调优工具_Linux命令行工具/" data-title="Java 性能调优工具（Linux命令行工具） | hang on, that&#39;s right" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/04/27/Server/jar_start_stop/" title="jar 启动脚本">
+  <strong>上一篇：</strong><br/>
+  <span>
+  jar 启动脚本</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/04/26/windows_filepath_too_long_can_not_del/"  title="windows 删除node_modules报错“文件名太长”">
+ <strong>下一篇：</strong><br/> 
+ <span>windows 删除node_modules报错“文件名太长”
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2018/04/27/Java/jvm/jvm性能调优工具_Linux命令行工具/" data-title="Java 性能调优工具（Linux命令行工具）" data-url="http://lovemiffy.cn/2018/04/27/Java/jvm/jvm性能调优工具_Linux命令行工具/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#top命令"><span class="toc-number">1.</span> <span class="toc-text">top命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sar命令"><span class="toc-number">2.</span> <span class="toc-text">sar命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vmstat命令可以查看内心、交互分区、I-O操作、上下文切换、时钟中断以及CPu的使用情况"><span class="toc-number">3.</span> <span class="toc-text">vmstat命令可以查看内心、交互分区、I/O操作、上下文切换、时钟中断以及CPu的使用情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iostat命令可以快速定位系统是否缠上了大量的I-O操作"><span class="toc-number">4.</span> <span class="toc-text">iostat命令可以快速定位系统是否缠上了大量的I/O操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pidstat工具-不仅可以监控进程的新能情况，也可以监视线程的性能情况"><span class="toc-number">5.</span> <span class="toc-text">pidstat工具 不仅可以监控进程的新能情况，也可以监视线程的性能情况</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="zvc888" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Java/JDK/" title="JDK">JDK<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JVM/" title="JVM">JVM<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Nginx/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Tomcat/" title="Tomcat">Tomcat<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/Windows/" title="Windows">Windows<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/druid/" title="druid">druid<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/git/" title="git">git<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java/" title="java">java<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java/linux/" title="linux">linux<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/maven/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/maven/" title="maven">maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/nginx/" title="nginx">nginx<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/git/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JAVA性能调优/" title="JAVA性能调优">JAVA性能调优<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nginx/" title="nginx">nginx<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JDK/" title="JDK">JDK<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/druid/" title="druid">druid<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JVM/" title="JVM">JVM<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Windows/" title="Windows">Windows<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://lovemiffy.cn" target="_blank" title="Zvc&#39;s Blog">Zvc&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 我不生产代码，我只是代码的搬运工 <br/>
+			hang on, that&#39;s right</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/zvc888" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:411014237@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="zvc">zvc</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"zvc"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?5a1ba66682e986b4aadbcbefaa91715c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

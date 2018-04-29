@@ -1,0 +1,664 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Java 性能调优工具（JDK图形化性能监控工具） | hang on, that&#39;s right</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="zvc">
+    
+
+    
+    <meta name="description" content="Java 性能调优工具（JDK图形化性能监控工具）
+来源 《Java程序性能优化》第六章
+
+JConsole 连接远程Java程序如果需要使用JConsole连接远程进程，则需要在远程Java应用程序启动时，加上如下参数：12345JAVA_OPTS=&amp;quot;$JAVA_OPTS -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 性能调优工具（JDK图形化性能监控工具）">
+<meta property="og:url" content="http://lovemiffy.cn/2018/04/28/Java/jvm/jvm性能调优工具_JDK图形化性能监控工具/index.html">
+<meta property="og:site_name" content="hang on, that's right">
+<meta property="og:description" content="Java 性能调优工具（JDK图形化性能监控工具）
+来源 《Java程序性能优化》第六章
+
+JConsole 连接远程Java程序如果需要使用JConsole连接远程进程，则需要在远程Java应用程序启动时，加上如下参数：12345JAVA_OPTS=&amp;quot;$JAVA_OPTS -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole2.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole1.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole3.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole4.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole5.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole6.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole7.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm1.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm2.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm3.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm4.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm5.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm6.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm7.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm8.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm9.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm10.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm11.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm12.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm12.png">
+<meta property="og:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm_btrace1.png">
+<meta property="og:updated_time" content="2018-04-29T15:49:35.876Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java 性能调优工具（JDK图形化性能监控工具）">
+<meta name="twitter:description" content="Java 性能调优工具（JDK图形化性能监控工具）
+来源 《Java程序性能优化》第六章
+
+JConsole 连接远程Java程序如果需要使用JConsole连接远程进程，则需要在远程Java应用程序启动时，加上如下参数：12345JAVA_OPTS=&amp;quot;$JAVA_OPTS -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management">
+<meta name="twitter:image" content="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole2.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="hang on, that&#39;s right" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/logo.png">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="hang on, that&#39;s right" title="hang on, that&#39;s right"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="hang on, that&#39;s right">hang on, that&#39;s right</a></h1>
+				<h2 class="blog-motto">blog</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/28/Java/jvm/jvm性能调优工具_JDK图形化性能监控工具/" title="Java 性能调优工具（JDK图形化性能监控工具）" itemprop="url">Java 性能调优工具（JDK图形化性能监控工具）</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-28T07:43:36.003Z" itemprop="datePublished"> 发表于 2018-04-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-性能调优工具（JDK图形化性能监控工具）"><span class="toc-number">1.</span> <span class="toc-text">Java 性能调优工具（JDK图形化性能监控工具）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JConsole-连接远程Java程序"><span class="toc-number">1.1.</span> <span class="toc-text">JConsole 连接远程Java程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVisual-VM-连接远程Java程序"><span class="toc-number">1.2.</span> <span class="toc-text">JVisual VM 连接远程Java程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MBean管理-visual-vm-可以通过插件，集成JConsole的MBean管理功能"><span class="toc-number">1.2.1.</span> <span class="toc-text">MBean管理  visual vm 可以通过插件，集成JConsole的MBean管理功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TDA-使用"><span class="toc-number">1.3.</span> <span class="toc-text">TDA 使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BTrace介绍"><span class="toc-number">1.4.</span> <span class="toc-text">BTrace介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#监控指定函数耗时"><span class="toc-number">1.4.1.</span> <span class="toc-text">监控指定函数耗时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#取得任务行代码信息"><span class="toc-number">1.4.2.</span> <span class="toc-text">取得任务行代码信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定时触发"><span class="toc-number">1.4.3.</span> <span class="toc-text">定时触发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控函数参数"><span class="toc-number">1.4.4.</span> <span class="toc-text">监控函数参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控文件"><span class="toc-number">1.4.5.</span> <span class="toc-text">监控文件</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Java-性能调优工具（JDK图形化性能监控工具）"><a href="#Java-性能调优工具（JDK图形化性能监控工具）" class="headerlink" title="Java 性能调优工具（JDK图形化性能监控工具）"></a>Java 性能调优工具（JDK图形化性能监控工具）</h1><blockquote>
+<p>来源 《Java程序性能优化》第六章</p>
+</blockquote>
+<h2 id="JConsole-连接远程Java程序"><a href="#JConsole-连接远程Java程序" class="headerlink" title="JConsole 连接远程Java程序"></a>JConsole 连接远程Java程序</h2><p>如果需要使用JConsole连接远程进程，则需要在远程Java应用程序启动时，加上如下参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">JAVA_OPTS=&quot;$JAVA_OPTS -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote&quot;</div><div class="line">JAVA_OPTS=&quot;$JAVA_OPTS -Dcom.sun.management.jmxremote.port=12345&quot;</div><div class="line">JAVA_OPTS=&quot;$JAVA_OPTS -Dcom.sun.management.jmxremote.authenticate=true&quot;</div><div class="line">JAVA_OPTS=&quot;$JAVA_OPTS -Dcom.sun.management.jmxremote.ssl=false&quot;</div><div class="line">JAVA_OPTS=&quot;$JAVA_OPTS -Dcom.sun.management.jmxremote.pwd.file=D:\Program Files\Java\jdk1.8.0_112\jre\lib\management\jmxremote.password.template&quot;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>-Djava.rmi.server.hostname 用于指定运行Java应用程序的计算机IP地址</li>
+<li>-Dcom.sun.management.jmxremote.port 用于指定JMX管理该进程的端口号</li>
+<li>-Dcom.sun.management.jmxremote.authenticate 是否需要校验权限，设置为true则需要配置-Dcom.sun.management.jmxremote.pwd.file 参考<a href="https://www.cnblogs.com/think-in-java/p/6138439.html" target="_blank" rel="external">https://www.cnblogs.com/think-in-java/p/6138439.html</a></li>
+</ul>
+<p><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole2.png" alt="JConsole查看应用程序概况"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole1.png" alt="JConsole查看堆内存信息"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole3.png" alt="JConsole查看线程信息"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole4.png" alt="JConsole显示类加载情况"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole5.png" alt="JConsole展示JVM虚拟机信息"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole6.png" alt="JConsole中的MBean管理"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jconsole7.png" alt="主要的Mbean操作"></p>
+<p>JConsole还支持插件</p>
+<h2 id="JVisual-VM-连接远程Java程序"><a href="#JVisual-VM-连接远程Java程序" class="headerlink" title="JVisual VM 连接远程Java程序"></a>JVisual VM 连接远程Java程序</h2><p>连接远程进程，需要在远程Java应用程序启动时，加上如下参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-Djava.rmi.server.hostname=127.0.0.1</div><div class="line">-Dcom.sun.management.jmxremote</div><div class="line">-Dcom.sun.management.jmxremote.port=12345</div><div class="line">-Dcom.sun.management.jmxremote.ssl=false</div><div class="line">-Dcom.sun.management.jmxremote.authenticate=false</div></pre></td></tr></table></figure></p>
+<p><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm1.png" alt="JVisual VM 添加JMX连接"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm2.png" alt="JVisual VM 配置JMX连接"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm3.png" alt="JVisual VM 中JMX应用程序显示"></p>
+<p>Visual VM 还支持添加远程主机。远程主机可以通过jstatd工具建立，如使用以下命令开启jstatd服务器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jstatd -J-Djava.security.policy=d:\jstatd.all.policy</div></pre></td></tr></table></figure></p>
+<p>jstat.all.policy内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grant codebase &quot;file:D:/Program Files/Java/jdk1.8.0_112/lib/tools.jar&quot; &#123;</div><div class="line">  permission java.security.AllPermission;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm4.png" alt="JVisual VM 添加远程主机"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm5.png" alt="JVisual VM显示应用程序概况"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm6.png" alt="JVisual VM显示Java程序内存信息"><br>检测死锁<br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm7.png" alt="JVisual VM的死锁提示"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line">package toolscheck;</div><div class="line"></div><div class="line">import java.util.ArrayList;</div><div class="line">import java.util.HashMap;</div><div class="line">import java.util.List;</div><div class="line">import java.util.Map;</div><div class="line"></div><div class="line">/**</div><div class="line"> * -agentpath:D:\tools\jprofiler6\bin\windows\jprofilerti.dll=port=25000</div><div class="line"> * @author Administrator</div><div class="line"> *</div><div class="line"> */</div><div class="line">public class MethodTime &#123;</div><div class="line">	static java.util.Random r=new java.util.Random();</div><div class="line">	static Map&lt;String,String&gt; map=null;</div><div class="line">	static&#123;</div><div class="line">		map=new HashMap&lt;String,String&gt;();</div><div class="line">		map.put(&quot;1&quot;, &quot;Java&quot;);</div><div class="line">		map.put(&quot;2&quot;, &quot;C++&quot;);</div><div class="line">		map.put(&quot;3&quot;, &quot;Delphi&quot;);</div><div class="line">		map.put(&quot;4&quot;, &quot;C&quot;);</div><div class="line">		map.put(&quot;5&quot;, &quot;Phython&quot;);</div><div class="line">	&#125;</div><div class="line">	public String getNameById(String id)&#123;</div><div class="line">		try &#123;</div><div class="line">			Thread.sleep(1);</div><div class="line">		&#125; catch (InterruptedException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">		return map.get(id);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public List&lt;String&gt; getNamesByIds(String ids)&#123;</div><div class="line">		List&lt;String&gt; re=new ArrayList&lt;String&gt;();</div><div class="line">		String[] strs=ids.split(&quot;,&quot;);</div><div class="line">		for(String id:strs)&#123;</div><div class="line">			re.add(getNameById(id));</div><div class="line">		&#125;</div><div class="line">		return re;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public List&lt;String&gt; getNamesByIdsBad(String ids)&#123;</div><div class="line">		List&lt;String&gt; re=new ArrayList&lt;String&gt;();</div><div class="line">		String[] strs=ids.split(&quot;,&quot;);</div><div class="line">		for(String id:strs)&#123;</div><div class="line">			//A bad code</div><div class="line">			getNameById(id);</div><div class="line">			re.add(getNameById(id));</div><div class="line">		&#125;</div><div class="line">		return re;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public class NamesByIdsThread implements Runnable&#123;</div><div class="line">		@Override</div><div class="line">		public void run() &#123;</div><div class="line">			try&#123;</div><div class="line">				while(true)&#123;</div><div class="line">					int c=r.nextInt(4);</div><div class="line">					String ids=&quot;&quot;;</div><div class="line">					for(int i=0;i&lt;c;i++)</div><div class="line">						ids=Integer.toString((r.nextInt(4)+1))+&quot;,&quot;;</div><div class="line">					getNamesByIds(ids);</div><div class="line">				&#125;</div><div class="line">			&#125;catch(Exception e)&#123;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public class NamesByIdsBadThread implements Runnable&#123;</div><div class="line">		@Override</div><div class="line">		public void run() &#123;</div><div class="line">			try&#123;</div><div class="line">				while(true)&#123;</div><div class="line">					int c=r.nextInt(4);</div><div class="line">					String ids=&quot;&quot;;</div><div class="line">					for(int i=0;i&lt;c;i++)</div><div class="line">						ids=Integer.toString((r.nextInt(4)+1))+&quot;,&quot;;</div><div class="line">					getNamesByIdsBad(ids);</div><div class="line">				&#125;</div><div class="line">			&#125;catch(Exception e)&#123;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public static void main(String args[])&#123;</div><div class="line">		MethodTime instance=new MethodTime();</div><div class="line">		new Thread(instance.new NamesByIdsThread()).start();</div><div class="line">		new Thread(instance.new NamesByIdsBadThread()).start();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm8.png" alt="JVisual VM方法耗时监控"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm9.png" alt="JVisual VM导出快照"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm10.png" alt="JVisual VM导出内存快照"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm11.png" alt="内存快照分析与快照比较"><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm12.png" alt="进入类实例页面"></p>
+<h3 id="MBean管理-visual-vm-可以通过插件，集成JConsole的MBean管理功能"><a href="#MBean管理-visual-vm-可以通过插件，集成JConsole的MBean管理功能" class="headerlink" title="MBean管理  visual vm 可以通过插件，集成JConsole的MBean管理功能"></a>MBean管理  visual vm 可以通过插件，集成JConsole的MBean管理功能</h3><h2 id="TDA-使用"><a href="#TDA-使用" class="headerlink" title="TDA 使用"></a>TDA 使用</h2><blockquote>
+<p>TDA 既可以单独使用，也可以做为visual vm插件使用<br>TDA 实际上是一个文本分析工具，它将线程快照的文本信息进行整理和统计，以图形化的方式展现，方便开发人员分析数据。</p>
+</blockquote>
+<p>下载地址<a href="https://github.com/irockel/tda" target="_blank" rel="external">https://github.com/irockel/tda</a><br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm12.png" alt="进入类实例页面"></p>
+<h2 id="BTrace介绍"><a href="#BTrace介绍" class="headerlink" title="BTrace介绍"></a>BTrace介绍</h2><blockquote>
+<p>BTrace 是一款非常有意思的工具，它可以在不停机的情况下，通过字节码注入，动态监控系统的运行情况。它可以跟踪指定的方法调用、狗仔函数调用和系统内存等信息。<br><img src="http://okzebhezs.bkt.clouddn.com/Java/jvm/jdk_picture_tools_jvisualvm_btrace1.png" alt="进入BTrace界面"></p>
+</blockquote>
+<p>在Jvisual VM 插件中下载并安装后，就可以执行BTrace脚本了</p>
+<p>使用的目标测试程序如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">package toolscheck;</div><div class="line"></div><div class="line">import java.io.*;</div><div class="line"></div><div class="line">public class BTraceTest &#123;</div><div class="line">	public static void writeFile(String filename) throws IOException, InterruptedException&#123;</div><div class="line">		File f=new File(filename);</div><div class="line">		if(!f.exists())&#123;</div><div class="line">			f.createNewFile();</div><div class="line">		&#125;</div><div class="line">		DataOutputStream fos=new DataOutputStream(new FileOutputStream(f));</div><div class="line">		fos.writeBytes(filename);</div><div class="line">		fos.close();</div><div class="line">		Thread.sleep(200);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public static String readFile(String filename) throws IOException, InterruptedException&#123;</div><div class="line">		File f=new File(filename);</div><div class="line">		DataInputStream fis=new DataInputStream (new FileInputStream(f));</div><div class="line">		String re=fis.readLine();</div><div class="line">		fis.close();</div><div class="line">		f.delete();</div><div class="line">		Thread.sleep(200);</div><div class="line">		return re;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public static void main(String args[]) throws IOException, InterruptedException&#123;</div><div class="line">		while(true)&#123;</div><div class="line">			String filename=Integer.toString(((int)(Math.random()*100)));</div><div class="line">			writeFile(filename);</div><div class="line">			readFile(filename);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="监控指定函数耗时"><a href="#监控指定函数耗时" class="headerlink" title="监控指定函数耗时"></a>监控指定函数耗时</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">import com.sun.btrace.BTraceUtils;</div><div class="line">import com.sun.btrace.annotations.*;</div><div class="line">import static com.sun.btrace.BTraceUtils.*;</div><div class="line"></div><div class="line">@BTrace</div><div class="line">public class PrintTimes &#123;</div><div class="line">	/* put your code here */</div><div class="line">    /**</div><div class="line">     开始时间</div><div class="line">     */</div><div class="line">    @TLS</div><div class="line">    private static long startTime=0;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 方法开始时调用</div><div class="line">     */</div><div class="line"></div><div class="line">    @OnMethod(clazz = &quot;/.+/&quot;, method=&quot;/writeFile/&quot;)</div><div class="line">    public static void startMethod()&#123;</div><div class="line">        startTime = BTraceUtils.timeMillis();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @SuppressWarnings(&quot;deprecation&quot;)</div><div class="line">    @OnMethod(clazz = &quot;/.+/&quot;, method = &quot;/writeFile/&quot;, location = @Location(Kind.RETURN)) // 方法返回时触发</div><div class="line">    public static void endMethod()&#123;</div><div class="line">        print(strcat(strcat(name(probeClass()), &quot;.&quot;), probeMethod()));</div><div class="line">        print(&quot; [&quot;);</div><div class="line">        print(strcat(&quot;Time taken : &quot;, str(timeMillis() - startTime)));</div><div class="line">        println(&quot;]&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="取得任务行代码信息"><a href="#取得任务行代码信息" class="headerlink" title="取得任务行代码信息"></a>取得任务行代码信息</h3><p>待补充</p>
+<h3 id="定时触发"><a href="#定时触发" class="headerlink" title="定时触发"></a>定时触发</h3><p>待补充</p>
+<h3 id="监控函数参数"><a href="#监控函数参数" class="headerlink" title="监控函数参数"></a>监控函数参数</h3><p>待补充</p>
+<h3 id="监控文件"><a href="#监控文件" class="headerlink" title="监控文件"></a>监控文件</h3><p>待补充</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>►<a class="article-category-link" href="/categories/Java/JDK/">JDK</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java/">Java</a><a href="/tags/JDK/">JDK</a><a href="/tags/JAVA性能调优/">JAVA性能调优</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://lovemiffy.cn/2018/04/28/Java/jvm/jvm性能调优工具_JDK图形化性能监控工具/" data-title="Java 性能调优工具（JDK图形化性能监控工具） | hang on, that&#39;s right" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/04/27/Java/jvm/jvm性能调优工具_JDK命令行工具/"  title="Java 性能调优工具（JDK命令行工具）">
+ <strong>下一篇：</strong><br/> 
+ <span>Java 性能调优工具（JDK命令行工具）
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2018/04/28/Java/jvm/jvm性能调优工具_JDK图形化性能监控工具/" data-title="Java 性能调优工具（JDK图形化性能监控工具）" data-url="http://lovemiffy.cn/2018/04/28/Java/jvm/jvm性能调优工具_JDK图形化性能监控工具/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-性能调优工具（JDK图形化性能监控工具）"><span class="toc-number">1.</span> <span class="toc-text">Java 性能调优工具（JDK图形化性能监控工具）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JConsole-连接远程Java程序"><span class="toc-number">1.1.</span> <span class="toc-text">JConsole 连接远程Java程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVisual-VM-连接远程Java程序"><span class="toc-number">1.2.</span> <span class="toc-text">JVisual VM 连接远程Java程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MBean管理-visual-vm-可以通过插件，集成JConsole的MBean管理功能"><span class="toc-number">1.2.1.</span> <span class="toc-text">MBean管理  visual vm 可以通过插件，集成JConsole的MBean管理功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TDA-使用"><span class="toc-number">1.3.</span> <span class="toc-text">TDA 使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BTrace介绍"><span class="toc-number">1.4.</span> <span class="toc-text">BTrace介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#监控指定函数耗时"><span class="toc-number">1.4.1.</span> <span class="toc-text">监控指定函数耗时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#取得任务行代码信息"><span class="toc-number">1.4.2.</span> <span class="toc-text">取得任务行代码信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定时触发"><span class="toc-number">1.4.3.</span> <span class="toc-text">定时触发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控函数参数"><span class="toc-number">1.4.4.</span> <span class="toc-text">监控函数参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控文件"><span class="toc-number">1.4.5.</span> <span class="toc-text">监控文件</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="zvc888" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Java/JDK/" title="JDK">JDK<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JVM/" title="JVM">JVM<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Nginx/Tomcat/" title="Tomcat">Tomcat<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Tomcat/" title="Tomcat">Tomcat<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/Windows/" title="Windows">Windows<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/druid/" title="druid">druid<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/git/" title="git">git<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java/" title="java">java<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java/linux/" title="linux">linux<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/maven/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/maven/" title="maven">maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/nginx/" title="nginx">nginx<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/git/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JAVA性能调优/" title="JAVA性能调优">JAVA性能调优<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nginx/" title="nginx">nginx<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tomcat/" title="Tomcat">Tomcat<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JDK/" title="JDK">JDK<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/druid/" title="druid">druid<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JVM/" title="JVM">JVM<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Windows/" title="Windows">Windows<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://lovemiffy.cn" target="_blank" title="Zvc&#39;s Blog">Zvc&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 我不生产代码，我只是代码的搬运工 <br/>
+			hang on, that&#39;s right</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/zvc888" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:411014237@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="zvc">zvc</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"zvc"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?5a1ba66682e986b4aadbcbefaa91715c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
