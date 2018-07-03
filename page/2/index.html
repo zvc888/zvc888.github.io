@@ -78,26 +78,32 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/04/26/Server/tomcat_cross_domain/" title="Tomcat 解决跨域问题" itemprop="url">Tomcat 解决跨域问题</a>
+      <a href="/2018/04/26/markdown_gener_html/" title="maven插件markdown生成html接口文档" itemprop="url">maven插件markdown生成html接口文档</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
 		
   <p class="article-time">
-    <time datetime="2018-04-26T09:11:26.391Z" itemprop="datePublished"> 发表于 2018-04-26</time>
+    <time datetime="2018-04-26T09:11:26.392Z" itemprop="datePublished"> 发表于 2018-04-26</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <ol>
-<li>项目web.xml</li>
+        <p><a href="https://github.com/zvc888/simple-site.git" title="源码github地址" target="_blank" rel="external">源码github地址</a></p>
+<h2 id="web服务器-centos-6-5"><a href="#web服务器-centos-6-5" class="headerlink" title="web服务器 centos 6.5"></a>web服务器 centos 6.5</h2><ol>
+<li>安装scp,unzip</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;filter&gt;</div><div class="line">    &lt;filter-name&gt;CORS&lt;/filter-name&gt;</div><div class="line">    &lt;filter-class&gt;com.thetransactioncompany.cors.CORSFilter&lt;/filter-class&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">     &lt;param-name&gt;cors.allowOrigin&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;*&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">     &lt;param-name&gt;cors.supportedMethods&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;GET, POST, HEAD, PUT, DELETE&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">     &lt;param-name&gt;cors.supportedHeaders&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;Accept, Origin, X-Requested-With, Content-Type, Last-Modified&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">        &lt;param-name&gt;cors.exposedHeaders&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;Set-Cookie&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">        &lt;param-name&gt;cors.supportsCredentials&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;true&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">&lt;/filter&gt;</div><div class="line">&lt;filter-mapping&gt;</div><div class="line">    &lt;filter-name&gt;CORS&lt;/filter-name&gt;</div><div class="line">    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</div><div class="line">&lt;/filter-mapping&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install unzip  openssh-clients -y</div></pre></td></tr></table></figure>
 <ol>
-<li>将cors-filter-2.4.jar,java-property-utils-1.9.1.jar添加到项目lib</li>
+<li>安装web服务器 nginx，使用yum安装<br><a href="http://nginx.org/en/linux_packages.html#stable" title="nginx官网" target="_blank" rel="external">nginx官网</a></li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[nginx]</div><div class="line">name=nginx repo</div><div class="line">baseurl=http://nginx.org/packages/centos/6/$basearch/</div><div class="line">gpgcheck=0</div><div class="line">enabled=1</div></pre></td></tr></table></figure>
+<ol>
+<li>eclipse 新建maven-archetype-site项目</li>
+</ol>
+<p>附录：<br><a href="https://github.com/kongchen/swagger-maven-plugin.git" title="swagger生成站点" target="_blank" rel="external">swagger生成站点</a></p>
 
         
         
@@ -110,13 +116,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Tomcat/">Tomcat</a>
+  <a class="article-category-link" href="/categories/maven/">maven</a>►<a class="article-category-link" href="/categories/maven/markdown/">markdown</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Tomcat/">Tomcat</a>
+  <span></span> <a href="/tags/maven/">maven</a><a href="/tags/markdown/">markdown</a>
   </div>
 
 </div>
@@ -127,7 +133,68 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2018/04/26/Server/tomcat_cross_domain/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Server/tomcat_cross_domain/" data-count-type="comments">&nbsp;</a>
+		<a href="/2018/04/26/markdown_gener_html/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/markdown_gener_html/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/26/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-26T09:11:26.391Z" itemprop="datePublished"> 发表于 2018-04-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2018/04/26/hello-world/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/hello-world/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -242,36 +309,27 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/04/26/Server/nginx_tomcat_ssl/" title="tomcat，nginx设置ssl" itemprop="url">tomcat，nginx设置ssl</a>
+      <a href="/2018/04/26/Server/tomcat_cross_domain/" title="Tomcat 解决跨域问题" itemprop="url">Tomcat 解决跨域问题</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
 		
   <p class="article-time">
-    <time datetime="2018-04-26T09:11:26.390Z" itemprop="datePublished"> 发表于 2018-04-26</time>
+    <time datetime="2018-04-26T09:11:26.391Z" itemprop="datePublished"> 发表于 2018-04-26</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <h1 id="Tomcat-设置https"><a href="#Tomcat-设置https" class="headerlink" title="Tomcat 设置https"></a>Tomcat 设置https</h1><ol>
-<li>jdk自带工具生成keystore</li>
+        <ol>
+<li>项目web.xml</li>
 </ol>
-<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">keytool.exe -genkey -alias tomcat -keyalg RSA -keystore keystore</div></pre></td></tr></table></figure>
-<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">keytool -genkey -alias tomcat -keyalg RSA -keystore keystore</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;filter&gt;</div><div class="line">    &lt;filter-name&gt;CORS&lt;/filter-name&gt;</div><div class="line">    &lt;filter-class&gt;com.thetransactioncompany.cors.CORSFilter&lt;/filter-class&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">     &lt;param-name&gt;cors.allowOrigin&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;*&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">     &lt;param-name&gt;cors.supportedMethods&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;GET, POST, HEAD, PUT, DELETE&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">     &lt;param-name&gt;cors.supportedHeaders&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;Accept, Origin, X-Requested-With, Content-Type, Last-Modified&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">        &lt;param-name&gt;cors.exposedHeaders&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;Set-Cookie&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">        &lt;param-name&gt;cors.supportsCredentials&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;true&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">&lt;/filter&gt;</div><div class="line">&lt;filter-mapping&gt;</div><div class="line">    &lt;filter-name&gt;CORS&lt;/filter-name&gt;</div><div class="line">    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</div><div class="line">&lt;/filter-mapping&gt;</div></pre></td></tr></table></figure>
 <ol>
-<li>修改tomcat配置 conf/server.xml</li>
+<li>将cors-filter-2.4.jar,java-property-utils-1.9.1.jar添加到项目lib</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Connector port=&quot;8443&quot; protocol=&quot;org.apache.coyote.http11.Http11NioProtocol&quot; maxThreads=&quot;150&quot; SSLEnabled=&quot;true&quot; scheme=&quot;https&quot; secure=&quot;true&quot; keystoreFile=&quot;F\\cert\\keystore&quot; keystorePass=&quot;123456&quot; clientAuth=&quot;false&quot; sslProtocol=&quot;TLS&quot; /&gt;</div></pre></td></tr></table></figure>
-<ol>
-<li>修改tomcat的conf/web.xml</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;security-constraint&gt;  </div><div class="line">	&lt;!-- Authorization setting for SSL --&gt; </div><div class="line">	&lt;web-resource-collection &gt;  </div><div class="line">		&lt;web-resource-name &gt;SSL&lt;/web-resource-name&gt;  </div><div class="line">		&lt;url-pattern&gt;/*&lt;/url-pattern&gt;  </div><div class="line">	&lt;/web-resource-collection&gt;  </div><div class="line">    &lt;user-data-constraint&gt;  </div><div class="line">        &lt;transport-guarantee&gt;CONFIDENTIAL&lt;/transport-guarantee&gt;  </div><div class="line">    &lt;/user-data-constraint&gt;  </div><div class="line">&lt;/security-constraint&gt;</div></pre></td></tr></table></figure>
-<p>配置文件过滤策略，比如，只对 .jsp 的请求自动转化为HTTPS ,配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;security-constraint&gt;  </div><div class="line">    &lt;web-resource-collection &gt;  </div><div class="line">        &lt;web-resource-name &gt;SSL&lt;/web-resource-name&gt;  </div><div class="line">        &lt;url-pattern&gt;*.jsp&lt;/url-pattern&gt;  </div><div class="line">    &lt;/web-resource-collection&gt;  </div><div class="line">    &lt;user-data-constraint&gt;  </div><div class="line">        &lt;transport-guarantee&gt;CONFIDENTIAL&lt;/transport-guarantee&gt;  </div><div class="line">    &lt;/user-data-constraint&gt;  </div><div class="line">&lt;/security-constraint&gt;</div></pre></td></tr></table></figure></p>
-<h1 id="nginx-设置-https"><a href="#nginx-设置-https" class="headerlink" title="nginx 设置 https"></a>nginx 设置 https</h1><p>Linux</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">openssl genrsa -des3 -out wxyxjc_1332255_com.key 1024</div><div class="line"></div><div class="line">openssl req -new -key wxyxjc_1332255_com.key -out wxyxjc_1332255_com.csr</div><div class="line"></div><div class="line">openssl rsa -in wxyxjc_1332255_com.key -out wxyxjc_1332255_com_nopwd.key</div><div class="line"></div><div class="line">openssl x509 -req -days 3655 -in wxyxjc_1332255_com.csr -signkey wxyxjc_1332255_com_nopwd.key -out wxyxjc_1332255_com.crt</div></pre></td></tr></table></figure>
-<h2 id="nginx-配置文件"><a href="#nginx-配置文件" class="headerlink" title="nginx 配置文件"></a>nginx 配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    listen 443;</div><div class="line">    server_name wxyxjc.xxx.com;</div><div class="line">    charset utf-8;</div><div class="line"></div><div class="line">    ssl on;</div><div class="line">    ssl_certificate /usr/local/nginx/ssl/1_wxyxjc.1332255.com_bundle.crt;</div><div class="line">    ssl_certificate_key /usr/local/nginx/ssl/2_wxyxjc.1332255.com.key;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">      proxy_pass http://192.168.37.28:8080;</div><div class="line">      proxy_redirect    off;</div><div class="line">      proxy_set_header   Host             $host;</div><div class="line">      proxy_set_header   X-Real-IP        $remote_addr;</div><div class="line">      proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
         
         
         <p class="article-more-link">
@@ -283,13 +341,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Nginx/">Nginx</a>►<a class="article-category-link" href="/categories/Nginx/Tomcat/">Tomcat</a>
+  <a class="article-category-link" href="/categories/Tomcat/">Tomcat</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Tomcat/">Tomcat</a><a href="/tags/Nginx/">Nginx</a>
+  <span></span> <a href="/tags/Tomcat/">Tomcat</a>
   </div>
 
 </div>
@@ -300,7 +358,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2018/04/26/Server/nginx_tomcat_ssl/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Server/nginx_tomcat_ssl/" data-count-type="comments">&nbsp;</a>
+		<a href="/2018/04/26/Server/tomcat_cross_domain/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Server/tomcat_cross_domain/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -425,6 +483,84 @@ public class SetList {
 	
 	  	<span></span>
 		<a href="/2018/04/26/Java/慎用重载/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Java/慎用重载/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/26/Server/nginx_tomcat_ssl/" title="tomcat，nginx设置ssl" itemprop="url">tomcat，nginx设置ssl</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-26T09:11:26.390Z" itemprop="datePublished"> 发表于 2018-04-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Tomcat-设置https"><a href="#Tomcat-设置https" class="headerlink" title="Tomcat 设置https"></a>Tomcat 设置https</h1><ol>
+<li>jdk自带工具生成keystore</li>
+</ol>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">keytool.exe -genkey -alias tomcat -keyalg RSA -keystore keystore</div></pre></td></tr></table></figure>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">keytool -genkey -alias tomcat -keyalg RSA -keystore keystore</div></pre></td></tr></table></figure>
+<ol>
+<li>修改tomcat配置 conf/server.xml</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Connector port=&quot;8443&quot; protocol=&quot;org.apache.coyote.http11.Http11NioProtocol&quot; maxThreads=&quot;150&quot; SSLEnabled=&quot;true&quot; scheme=&quot;https&quot; secure=&quot;true&quot; keystoreFile=&quot;F\\cert\\keystore&quot; keystorePass=&quot;123456&quot; clientAuth=&quot;false&quot; sslProtocol=&quot;TLS&quot; /&gt;</div></pre></td></tr></table></figure>
+<ol>
+<li>修改tomcat的conf/web.xml</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;security-constraint&gt;  </div><div class="line">	&lt;!-- Authorization setting for SSL --&gt; </div><div class="line">	&lt;web-resource-collection &gt;  </div><div class="line">		&lt;web-resource-name &gt;SSL&lt;/web-resource-name&gt;  </div><div class="line">		&lt;url-pattern&gt;/*&lt;/url-pattern&gt;  </div><div class="line">	&lt;/web-resource-collection&gt;  </div><div class="line">    &lt;user-data-constraint&gt;  </div><div class="line">        &lt;transport-guarantee&gt;CONFIDENTIAL&lt;/transport-guarantee&gt;  </div><div class="line">    &lt;/user-data-constraint&gt;  </div><div class="line">&lt;/security-constraint&gt;</div></pre></td></tr></table></figure>
+<p>配置文件过滤策略，比如，只对 .jsp 的请求自动转化为HTTPS ,配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;security-constraint&gt;  </div><div class="line">    &lt;web-resource-collection &gt;  </div><div class="line">        &lt;web-resource-name &gt;SSL&lt;/web-resource-name&gt;  </div><div class="line">        &lt;url-pattern&gt;*.jsp&lt;/url-pattern&gt;  </div><div class="line">    &lt;/web-resource-collection&gt;  </div><div class="line">    &lt;user-data-constraint&gt;  </div><div class="line">        &lt;transport-guarantee&gt;CONFIDENTIAL&lt;/transport-guarantee&gt;  </div><div class="line">    &lt;/user-data-constraint&gt;  </div><div class="line">&lt;/security-constraint&gt;</div></pre></td></tr></table></figure></p>
+<h1 id="nginx-设置-https"><a href="#nginx-设置-https" class="headerlink" title="nginx 设置 https"></a>nginx 设置 https</h1><p>Linux</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">openssl genrsa -des3 -out wxyxjc_1332255_com.key 1024</div><div class="line"></div><div class="line">openssl req -new -key wxyxjc_1332255_com.key -out wxyxjc_1332255_com.csr</div><div class="line"></div><div class="line">openssl rsa -in wxyxjc_1332255_com.key -out wxyxjc_1332255_com_nopwd.key</div><div class="line"></div><div class="line">openssl x509 -req -days 3655 -in wxyxjc_1332255_com.csr -signkey wxyxjc_1332255_com_nopwd.key -out wxyxjc_1332255_com.crt</div></pre></td></tr></table></figure>
+<h2 id="nginx-配置文件"><a href="#nginx-配置文件" class="headerlink" title="nginx 配置文件"></a>nginx 配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    listen 443;</div><div class="line">    server_name wxyxjc.xxx.com;</div><div class="line">    charset utf-8;</div><div class="line"></div><div class="line">    ssl on;</div><div class="line">    ssl_certificate /usr/local/nginx/ssl/1_wxyxjc.1332255.com_bundle.crt;</div><div class="line">    ssl_certificate_key /usr/local/nginx/ssl/2_wxyxjc.1332255.com.key;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">      proxy_pass http://192.168.37.28:8080;</div><div class="line">      proxy_redirect    off;</div><div class="line">      proxy_set_header   Host             $host;</div><div class="line">      proxy_set_header   X-Real-IP        $remote_addr;</div><div class="line">      proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Nginx/">Nginx</a>►<a class="article-category-link" href="/categories/Nginx/Tomcat/">Tomcat</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Tomcat/">Tomcat</a><a href="/tags/Nginx/">Nginx</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2018/04/26/Server/nginx_tomcat_ssl/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Server/nginx_tomcat_ssl/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -658,161 +794,6 @@ public class SetList {
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/04/26/Java/jvm/jvm常用参数/" title="jvm常用参数" itemprop="url">jvm常用参数</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-26T09:11:26.346Z" itemprop="datePublished"> 发表于 2018-04-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>整体考虑堆大小</p>
-<p>-Xms3550m， 初始化堆大小。通常情况和-Xmx大小设置一样，避免虚拟机频繁自动计算后调整堆大小。<br>-Xmx3550m，最大堆大小。<br>考虑分代设置堆大小<br>首先通过jstat等工具查看应用程序正常情况下需要堆大小，再根据实际情况设置。</p>
-<p>新生代<br>-xmn2g，新生代大小。Sun官方推荐配置为整个堆的3/8。<br>-XX:SurvivorRatio=8。Eden和Survivor的比值（Survivor:Eden=2:8,即一个Survivor占用年轻代1/10）。<br>-XX:NewRatio=2。设置年轻代和年老代的比值。如:为3，表示年轻代与年老代比值为1：3，年轻代占整个年轻代年老代和的1/4</p>
-<p>老年代<br>老年代=整个堆大小-新生代-永久代</p>
-<p>永久代<br>-XX:Permsize=512m,设置永久代初始值。<br>-XX:MaxPermsize=512m，设置永久代的最大值。<br>注：Java8没有永久代说法，它们被称为元空间，-XX:MetaspaceSize=N<br>考虑本机直接内存<br>-XX:MaxDirectMemorySize=100M。默认与Java堆大最大值(-Xmx)<br>考虑虚拟机栈</p>
-<p>每个线程池的堆栈大小。在jdk5以上的版本，每个线程堆栈大小为1m，jdk5以前的版本是每个线程池大小为256k。一般设置256k。<br>-Xss256K.<br>考虑选择垃圾收集器<br>Serial收集器(串行收集器)</p>
-<p>历史最悠久的串行收集器。参数-XX:UseSerialGC。不太常用。<br>ParNew和ParOld收集器(并发收集器)</p>
-<p>Serial的多线程版本收集器。<br>Parallel Scavenge(吞吐量优先垃圾收集器)</p>
-<p>并行收集器，不同于多线程收集器ParNew，关注吞吐量的收集器。<br>-XX:MaxGCPauseMillis=10，设置垃圾收集停顿的最大毫秒数。<br>-XX:GCTimeRatio=49，垃圾收集器占比，默认是99。<br>-XX:+UseAdaptiveSeizPolicy，GC自适应调节策略。<br>-XX:+UseParallelGC,虚拟机Server模式默认值，使用Parallel Scavenge + Serial Old进行内存回收。<br>-XX:+UseParallelOldGC, 使用Parallel Scavenge + Parallel Old 进行内存回收。</p>
-<p>CMS<br>CMS作为老年代收集器，不能与Parallel Scavenge并存。可能会有内存碎片问题。<br>-XX:+UserConcMarkSweepGC，新生代默认用ParNew收集。也可以用-XX:+UserParNewGC强制指定新生代用ParNew收集<br>-XX:ParallelGCThreads=4，设置垃圾收集线程数。默认是(CPU数量+3)/4。垃圾收集线程数不少于25%，当CPU数量小于4的时候影响大。<br>-XX:CMSInitiatingOccupancyFraction=80，老年代垃圾占比达到这个阈值开始CMS收集，1.6默认是92。设置过高容易导致并发收集失败，会出现SerialOld收集的情况。<br>-XX:+UseCMSCompactAtFullCollection，在FULL GC的时候， 对年老代的压缩增加这个参数是个好习惯。可能会影响性能,但是可以消除碎片。<br>-XX:CMSFullGCsBeforeCompaction=1，多少次后进行内存压缩。<br>-XX:+CMSParallelRemarkEnabled, 为了减少第二次暂停的时间，开启并行remark,降低标记停顿<br>G1(Garbage First)</p>
-<p>-XX:+UseG1GC，谨慎使用，需要经过线上测试，还没有被设置为默认垃圾收集器。<br>之前的垃圾收集器收集的范围是新生代或者老年代，而G1垃圾收集器收集的范围包括新生代和老年代整个堆。G1将Java堆划为多个大小相同的独立区域(Region)，垃圾收集单位是Region。G1垃圾收集适合至少大于4G内存得系统。并且不会产生内存空间碎片。</p>
-<p>其他参数<br>-XX:MaxTenuringThreshold=30，晋升老年代的年龄。<br>-XX:PretenureSizeThreshold=?，直接晋升老年代的对象大小，不在新生代分配。<br>考虑日志打印</p>
-<p>-verbose:gc，打印GC日志<br>-XX:+PrintGC，打印GC基本日志<br>-XX:+PrintGCDetails，打印GC详细日志<br>-XX:+PrintGCTimeStamps，打印相对时间戳<br>-XX:+PrintGCApplicationStoppedTime,打印垃圾回收期间程序暂停的时间<br>-XX:+PrintGCApplicationConcurrentTime,打印每次垃圾回收前,程序未中断的执行时间<br>-XX:+PrintTenuringDistribution：查看每次minor GC后新的存活周期的阈值<br>-XX:+PrintTLAB,查看TLAB空间的使用情况<br>-Xloggc:filename,把相关日志信息记录到文件以便分析</p>
-<p>考虑OOM(堆溢出)时保留现场日志<br>当抛出OOM时进行heapdump</p>
-<p>-XX:+HeapDumpOnOutOfMemoryError,JVM异常自动生成堆转储<br>-XX:HeapDumpPath=/data/log/tomcat_heapdump.hprof，堆转储文件名</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JVM/">JVM</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/JVM/">JVM</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/04/26/Java/jvm/jvm常用参数/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Java/jvm/jvm常用参数/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/04/26/Java/durid_encrypt_config/" title="druid数据库密码加密配置" itemprop="url">druid数据库密码加密配置</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-26T09:11:26.346Z" itemprop="datePublished"> 发表于 2018-04-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ol>
-<li><p>在spring的配置文件dataSource节点添加以下属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;property name=&quot;connectionProperties&quot; value=&quot;config.decrypt=true;config.decrypt.key=$&#123;db.publicKey&#125;&quot; /&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>在命令行窗口输入以下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -cp druid-1.0.20.jar com.alibaba.druid.filter.config.ConfigTools oRcl_123</div></pre></td></tr></table></figure>
-</li>
-<li><p>会生成以下信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">privateKey:MIIBUwIBADANBgkqhkiG9w0BAQEFAASCAT0wggE5AgEAAkEAs2nalj6ktNpz+rwrrPi1TOu0yGG6IhhrAEcUkK83I4IkrV12kSlwz2j3TncNP+9tym9hVRA2AytmSAODJ61drwIDAQABAkBurOH2xPX9yrS4+9NFhLbymISRCBg2aDG5nh+FkVDGSbz5ijhq9cYId/Mn/c1g/uaQUzAvomJKac4bkgYS3AZhAiEA55dkTaH6dndpgh43dxVKSoRjAp/0OAskWunB2608siUCIQDGUqQrNNmC+</div><div class="line">rlZepuzDJpmrc9f4UrJr06yYPdAqZBmQwIgZGBMnA1JllEZTMk19womQffxRfD4E9ZYcoMAf+ss9HUCIFK5nCMtq2FYRkJNw26fXjRgYfUjm7efOZtsmRZO5J3TAiAbjgTcGU35ua+gR2AdJP10/8Z5MUyYaQChEcInVZmW8A==</div><div class="line">publicKey:MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALNp2pY+pLTac/q8K6z4tUzrtMhhuiIYawBHFJCvNyOCJK1ddpEpcM9o9053DT/vbcpvYVUQNgMrZkgDgyetXa8CAwEAAQ==</div><div class="line">password:q18FRHeqpCvECUc2W48Nw5kTjw0o0Nk3cW2zyAdOj9xopdhqFNE2CujLDxSPaCGX/k5E3nLo/08rcWg477rODA==</div></pre></td></tr></table></figure>
-</li>
-<li><p>将publicKey和password添加到配置文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">db.login.password=q18FRHeqpCvECUc2W48Nw5kTjw0o0Nk3cW2zyAdOj9xopdhqFNE2CujLDxSPaCGX/k5E3nLo/08rcWg477rODA==</div><div class="line">db.publicKey=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALNp2pY+pLTac/q8K6z4tUzrtMhhuiIYawBHFJCvNyOCJK1ddpEpcM9o9053DT/vbcpvYVUQNgMrZkgDgyetXa8CAwEAAQ==</div></pre></td></tr></table></figure>
-</li>
-<li><p>添加加解密配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.filters=config,mergeStat</div></pre></td></tr></table></figure></li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Java/">Java</a>►<a class="article-category-link" href="/categories/Java/druid/">druid</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/druid/">druid</a><a href="/tags/Java/">Java</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/04/26/Java/durid_encrypt_config/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Java/durid_encrypt_config/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2018/04/26/Java/feign_ribbon负载均衡/" title="feign,ribbon 负载均衡策略" itemprop="url">feign,ribbon 负载均衡策略</a>
   </h1>
   <p class="article-author">By
@@ -960,6 +941,10 @@ public class SetList {
 			<li><a href="/categories/git/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
 		  
 		
+		  
+			<li><a href="/categories/selenium/" title="selenium">selenium<sup>2</sup></a></li>
+		  
+		
 		</ul>
 </div>
 
@@ -998,15 +983,15 @@ public class SetList {
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+				<li><a href="/tags/selenium/" title="selenium">selenium<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
 			
 		
 			
@@ -1022,7 +1007,7 @@ public class SetList {
 			
 		
 			
-				<li><a href="/tags/Windows/" title="Windows">Windows<sup>1</sup></a></li>
+				<li><a href="/tags/behave/" title="behave">behave<sup>1</sup></a></li>
 			
 		
 			
@@ -1034,7 +1019,15 @@ public class SetList {
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
+				<li><a href="/tags/Windows/" title="Windows">Windows<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
 			
 		
 		</ul>

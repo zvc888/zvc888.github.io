@@ -78,6 +78,161 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/04/26/Java/durid_encrypt_config/" title="druid数据库密码加密配置" itemprop="url">druid数据库密码加密配置</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-26T09:11:26.346Z" itemprop="datePublished"> 发表于 2018-04-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ol>
+<li><p>在spring的配置文件dataSource节点添加以下属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;property name=&quot;connectionProperties&quot; value=&quot;config.decrypt=true;config.decrypt.key=$&#123;db.publicKey&#125;&quot; /&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在命令行窗口输入以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -cp druid-1.0.20.jar com.alibaba.druid.filter.config.ConfigTools oRcl_123</div></pre></td></tr></table></figure>
+</li>
+<li><p>会生成以下信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">privateKey:MIIBUwIBADANBgkqhkiG9w0BAQEFAASCAT0wggE5AgEAAkEAs2nalj6ktNpz+rwrrPi1TOu0yGG6IhhrAEcUkK83I4IkrV12kSlwz2j3TncNP+9tym9hVRA2AytmSAODJ61drwIDAQABAkBurOH2xPX9yrS4+9NFhLbymISRCBg2aDG5nh+FkVDGSbz5ijhq9cYId/Mn/c1g/uaQUzAvomJKac4bkgYS3AZhAiEA55dkTaH6dndpgh43dxVKSoRjAp/0OAskWunB2608siUCIQDGUqQrNNmC+</div><div class="line">rlZepuzDJpmrc9f4UrJr06yYPdAqZBmQwIgZGBMnA1JllEZTMk19womQffxRfD4E9ZYcoMAf+ss9HUCIFK5nCMtq2FYRkJNw26fXjRgYfUjm7efOZtsmRZO5J3TAiAbjgTcGU35ua+gR2AdJP10/8Z5MUyYaQChEcInVZmW8A==</div><div class="line">publicKey:MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALNp2pY+pLTac/q8K6z4tUzrtMhhuiIYawBHFJCvNyOCJK1ddpEpcM9o9053DT/vbcpvYVUQNgMrZkgDgyetXa8CAwEAAQ==</div><div class="line">password:q18FRHeqpCvECUc2W48Nw5kTjw0o0Nk3cW2zyAdOj9xopdhqFNE2CujLDxSPaCGX/k5E3nLo/08rcWg477rODA==</div></pre></td></tr></table></figure>
+</li>
+<li><p>将publicKey和password添加到配置文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">db.login.password=q18FRHeqpCvECUc2W48Nw5kTjw0o0Nk3cW2zyAdOj9xopdhqFNE2CujLDxSPaCGX/k5E3nLo/08rcWg477rODA==</div><div class="line">db.publicKey=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALNp2pY+pLTac/q8K6z4tUzrtMhhuiIYawBHFJCvNyOCJK1ddpEpcM9o9053DT/vbcpvYVUQNgMrZkgDgyetXa8CAwEAAQ==</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加加解密配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.filters=config,mergeStat</div></pre></td></tr></table></figure></li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>►<a class="article-category-link" href="/categories/Java/druid/">druid</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/druid/">druid</a><a href="/tags/Java/">Java</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2018/04/26/Java/durid_encrypt_config/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Java/durid_encrypt_config/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/26/Java/jvm/jvm常用参数/" title="jvm常用参数" itemprop="url">jvm常用参数</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-26T09:11:26.346Z" itemprop="datePublished"> 发表于 2018-04-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>整体考虑堆大小</p>
+<p>-Xms3550m， 初始化堆大小。通常情况和-Xmx大小设置一样，避免虚拟机频繁自动计算后调整堆大小。<br>-Xmx3550m，最大堆大小。<br>考虑分代设置堆大小<br>首先通过jstat等工具查看应用程序正常情况下需要堆大小，再根据实际情况设置。</p>
+<p>新生代<br>-xmn2g，新生代大小。Sun官方推荐配置为整个堆的3/8。<br>-XX:SurvivorRatio=8。Eden和Survivor的比值（Survivor:Eden=2:8,即一个Survivor占用年轻代1/10）。<br>-XX:NewRatio=2。设置年轻代和年老代的比值。如:为3，表示年轻代与年老代比值为1：3，年轻代占整个年轻代年老代和的1/4</p>
+<p>老年代<br>老年代=整个堆大小-新生代-永久代</p>
+<p>永久代<br>-XX:Permsize=512m,设置永久代初始值。<br>-XX:MaxPermsize=512m，设置永久代的最大值。<br>注：Java8没有永久代说法，它们被称为元空间，-XX:MetaspaceSize=N<br>考虑本机直接内存<br>-XX:MaxDirectMemorySize=100M。默认与Java堆大最大值(-Xmx)<br>考虑虚拟机栈</p>
+<p>每个线程池的堆栈大小。在jdk5以上的版本，每个线程堆栈大小为1m，jdk5以前的版本是每个线程池大小为256k。一般设置256k。<br>-Xss256K.<br>考虑选择垃圾收集器<br>Serial收集器(串行收集器)</p>
+<p>历史最悠久的串行收集器。参数-XX:UseSerialGC。不太常用。<br>ParNew和ParOld收集器(并发收集器)</p>
+<p>Serial的多线程版本收集器。<br>Parallel Scavenge(吞吐量优先垃圾收集器)</p>
+<p>并行收集器，不同于多线程收集器ParNew，关注吞吐量的收集器。<br>-XX:MaxGCPauseMillis=10，设置垃圾收集停顿的最大毫秒数。<br>-XX:GCTimeRatio=49，垃圾收集器占比，默认是99。<br>-XX:+UseAdaptiveSeizPolicy，GC自适应调节策略。<br>-XX:+UseParallelGC,虚拟机Server模式默认值，使用Parallel Scavenge + Serial Old进行内存回收。<br>-XX:+UseParallelOldGC, 使用Parallel Scavenge + Parallel Old 进行内存回收。</p>
+<p>CMS<br>CMS作为老年代收集器，不能与Parallel Scavenge并存。可能会有内存碎片问题。<br>-XX:+UserConcMarkSweepGC，新生代默认用ParNew收集。也可以用-XX:+UserParNewGC强制指定新生代用ParNew收集<br>-XX:ParallelGCThreads=4，设置垃圾收集线程数。默认是(CPU数量+3)/4。垃圾收集线程数不少于25%，当CPU数量小于4的时候影响大。<br>-XX:CMSInitiatingOccupancyFraction=80，老年代垃圾占比达到这个阈值开始CMS收集，1.6默认是92。设置过高容易导致并发收集失败，会出现SerialOld收集的情况。<br>-XX:+UseCMSCompactAtFullCollection，在FULL GC的时候， 对年老代的压缩增加这个参数是个好习惯。可能会影响性能,但是可以消除碎片。<br>-XX:CMSFullGCsBeforeCompaction=1，多少次后进行内存压缩。<br>-XX:+CMSParallelRemarkEnabled, 为了减少第二次暂停的时间，开启并行remark,降低标记停顿<br>G1(Garbage First)</p>
+<p>-XX:+UseG1GC，谨慎使用，需要经过线上测试，还没有被设置为默认垃圾收集器。<br>之前的垃圾收集器收集的范围是新生代或者老年代，而G1垃圾收集器收集的范围包括新生代和老年代整个堆。G1将Java堆划为多个大小相同的独立区域(Region)，垃圾收集单位是Region。G1垃圾收集适合至少大于4G内存得系统。并且不会产生内存空间碎片。</p>
+<p>其他参数<br>-XX:MaxTenuringThreshold=30，晋升老年代的年龄。<br>-XX:PretenureSizeThreshold=?，直接晋升老年代的对象大小，不在新生代分配。<br>考虑日志打印</p>
+<p>-verbose:gc，打印GC日志<br>-XX:+PrintGC，打印GC基本日志<br>-XX:+PrintGCDetails，打印GC详细日志<br>-XX:+PrintGCTimeStamps，打印相对时间戳<br>-XX:+PrintGCApplicationStoppedTime,打印垃圾回收期间程序暂停的时间<br>-XX:+PrintGCApplicationConcurrentTime,打印每次垃圾回收前,程序未中断的执行时间<br>-XX:+PrintTenuringDistribution：查看每次minor GC后新的存活周期的阈值<br>-XX:+PrintTLAB,查看TLAB空间的使用情况<br>-Xloggc:filename,把相关日志信息记录到文件以便分析</p>
+<p>考虑OOM(堆溢出)时保留现场日志<br>当抛出OOM时进行heapdump</p>
+<p>-XX:+HeapDumpOnOutOfMemoryError,JVM异常自动生成堆转储<br>-XX:HeapDumpPath=/data/log/tomcat_heapdump.hprof，堆转储文件名</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/JVM/">JVM</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JVM/">JVM</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2018/04/26/Java/jvm/jvm常用参数/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Java/jvm/jvm常用参数/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/04/26/Java/Spring/spring_bean_init/" title="bean在Spring容器的生命周期" itemprop="url">bean在Spring容器的生命周期</a>
   </h1>
   <p class="article-author">By
@@ -135,81 +290,6 @@
 	
 	  	<span></span>
 		<a href="/2018/04/26/Java/Spring/spring_bean_init/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Java/Spring/spring_bean_init/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/04/26/Java/Spring/spring_profile/" title="Spring @profile属性" itemprop="url">Spring @profile属性</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-26T09:11:26.345Z" itemprop="datePublished"> 发表于 2018-04-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="pforile作用于动态切换如：数据源，生产开发环境等"><a href="#pforile作用于动态切换如：数据源，生产开发环境等" class="headerlink" title="pforile作用于动态切换如：数据源，生产开发环境等"></a>pforile作用于动态切换如：数据源，生产开发环境等</h2><h3 id="ENV方式："><a href="#ENV方式：" class="headerlink" title="ENV方式："></a>ENV方式：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ConfigurableEnvironment.setActiveProfiles(&quot;test&quot;)</div></pre></td></tr></table></figure>
-<h3 id="JVM参数方式"><a href="#JVM参数方式" class="headerlink" title="JVM参数方式:"></a>JVM参数方式:</h3><ol>
-<li>tomcat 中 catalina.bat（.sh中不用“set”） 添加JAVA_OPS。通过设置active选择不同配置文件</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set JAVA_OPTS=&quot;-Dspring.profiles.active=test&quot;</div></pre></td></tr></table></figure>
-<ol>
-<li>eclipse 中启动tomcat。项目右键 run as –&gt; run configuration–&gt;Arguments–&gt; VM arguments中添加。local配置文件不必上传git追踪管理</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-Dspring.profiles.active=&quot;local&quot;</div></pre></td></tr></table></figure>
-<h3 id="web-xml方式"><a href="#web-xml方式" class="headerlink" title="web.xml方式"></a>web.xml方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;init-param&gt;</div><div class="line">  &lt;param-name&gt;spring.profiles.active&lt;/param-name&gt;</div><div class="line">  &lt;param-value&gt;production&lt;/param-value&gt;</div><div class="line">&lt;/init-param&gt;</div></pre></td></tr></table></figure>
-<h3 id="标注方式（junit单元测试非常实用）："><a href="#标注方式（junit单元测试非常实用）：" class="headerlink" title="标注方式（junit单元测试非常实用）："></a>标注方式（junit单元测试非常实用）：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@ActiveProfiles(&#123;&quot;unittest&quot;,&quot;productprofile&quot;&#125;)</div></pre></td></tr></table></figure>
-<p>引用原文：<a href="http://www.jianshu.com/p/948c303b2253" title="引用原文" target="_blank" rel="external">http://www.jianshu.com/p/948c303b2253</a></p>
-<p>源码链接：<a href="https://github.com/zvc888/spring_profile_test.git" title="源码链接" target="_blank" rel="external">https://github.com/zvc888/spring_profile_test.git</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Java/">Java</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Java/">Java</a><a href="/tags/Spring/">Spring</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/04/26/Java/Spring/spring_profile/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Java/Spring/spring_profile/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -551,6 +631,81 @@
 
 
 
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/26/Java/Spring/spring_profile/" title="Spring @profile属性" itemprop="url">Spring @profile属性</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-26T09:11:26.345Z" itemprop="datePublished"> 发表于 2018-04-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="pforile作用于动态切换如：数据源，生产开发环境等"><a href="#pforile作用于动态切换如：数据源，生产开发环境等" class="headerlink" title="pforile作用于动态切换如：数据源，生产开发环境等"></a>pforile作用于动态切换如：数据源，生产开发环境等</h2><h3 id="ENV方式："><a href="#ENV方式：" class="headerlink" title="ENV方式："></a>ENV方式：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ConfigurableEnvironment.setActiveProfiles(&quot;test&quot;)</div></pre></td></tr></table></figure>
+<h3 id="JVM参数方式"><a href="#JVM参数方式" class="headerlink" title="JVM参数方式:"></a>JVM参数方式:</h3><ol>
+<li>tomcat 中 catalina.bat（.sh中不用“set”） 添加JAVA_OPS。通过设置active选择不同配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set JAVA_OPTS=&quot;-Dspring.profiles.active=test&quot;</div></pre></td></tr></table></figure>
+<ol>
+<li>eclipse 中启动tomcat。项目右键 run as –&gt; run configuration–&gt;Arguments–&gt; VM arguments中添加。local配置文件不必上传git追踪管理</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-Dspring.profiles.active=&quot;local&quot;</div></pre></td></tr></table></figure>
+<h3 id="web-xml方式"><a href="#web-xml方式" class="headerlink" title="web.xml方式"></a>web.xml方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;init-param&gt;</div><div class="line">  &lt;param-name&gt;spring.profiles.active&lt;/param-name&gt;</div><div class="line">  &lt;param-value&gt;production&lt;/param-value&gt;</div><div class="line">&lt;/init-param&gt;</div></pre></td></tr></table></figure>
+<h3 id="标注方式（junit单元测试非常实用）："><a href="#标注方式（junit单元测试非常实用）：" class="headerlink" title="标注方式（junit单元测试非常实用）："></a>标注方式（junit单元测试非常实用）：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@ActiveProfiles(&#123;&quot;unittest&quot;,&quot;productprofile&quot;&#125;)</div></pre></td></tr></table></figure>
+<p>引用原文：<a href="http://www.jianshu.com/p/948c303b2253" title="引用原文" target="_blank" rel="external">http://www.jianshu.com/p/948c303b2253</a></p>
+<p>源码链接：<a href="https://github.com/zvc888/spring_profile_test.git" title="源码链接" target="_blank" rel="external">https://github.com/zvc888/spring_profile_test.git</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java/">Java</a><a href="/tags/Spring/">Spring</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2018/04/26/Java/Spring/spring_profile/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Java/Spring/spring_profile/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
@@ -642,6 +797,10 @@
 			<li><a href="/categories/git/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
 		  
 		
+		  
+			<li><a href="/categories/selenium/" title="selenium">selenium<sup>2</sup></a></li>
+		  
+		
 		</ul>
 </div>
 
@@ -680,15 +839,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+				<li><a href="/tags/selenium/" title="selenium">selenium<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
 			
 		
 			
@@ -704,7 +863,7 @@
 			
 		
 			
-				<li><a href="/tags/Windows/" title="Windows">Windows<sup>1</sup></a></li>
+				<li><a href="/tags/behave/" title="behave">behave<sup>1</sup></a></li>
 			
 		
 			
@@ -716,7 +875,15 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
+				<li><a href="/tags/Windows/" title="Windows">Windows<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
 			
 		
 		</ul>

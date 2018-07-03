@@ -78,6 +78,185 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/07/03/test/selenium/selenium_behave_hello/" title="selenium3.x自动化测试之behave" itemprop="url">selenium3.x自动化测试之behave</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
+		
+  <p class="article-time">
+    <time datetime="2018-07-03T13:21:34.988Z" itemprop="datePublished"> 发表于 2018-07-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="behave"><a href="#behave" class="headerlink" title="behave"></a>behave</h1><blockquote>
+<p>behave 是一个python的BDD框架 java对应的为cucumber<br>BDD Behavior Driven Development，行为驱动开发<br><a href="https://github.com/behave" title="https://github.com/behave" target="_blank" rel="external">behave的github</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2></blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install behave</div></pre></td></tr></table></figure>
+<h2 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h2><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>features/<br>fetures/example.feature<br>features/steps/example.py</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>新建features目录</li>
+<li>在features新建example.feature<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># -- FILE: features/example.feature</div><div class="line">Feature: Showing off behave</div><div class="line"></div><div class="line">  Scenario: Run a simple test</div><div class="line">    Given we have behave installed</div><div class="line">     When we implement 5 tests</div><div class="line">     Then behave will test them for us!</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>鼠标悬浮在代码上在pycharm中会有提示是否自动按照这个文件生成python基本代码</p>
+</blockquote>
+<ol>
+<li><p>新建features/steps/example.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> behave <span class="keyword">import</span> given, when, then, step</div><div class="line"></div><div class="line"><span class="meta">@given('we have behave installed')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">step_impl</span><span class="params">(context)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="meta">@when('we implement &#123;number:d&#125; tests')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">step_impl</span><span class="params">(context, number)</span>:</span>  <span class="comment"># -- <span class="doctag">NOTE:</span> number is converted into integer</span></div><div class="line">    <span class="keyword">assert</span> number &gt; <span class="number">1</span> <span class="keyword">or</span> number == <span class="number">0</span></div><div class="line">    context.tests_count = number</div><div class="line"></div><div class="line"><span class="meta">@then('behave will test them for us!')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">step_impl</span><span class="params">(context)</span>:</span></div><div class="line">    <span class="keyword">assert</span> context.failed <span class="keyword">is</span> <span class="keyword">False</span></div><div class="line">    <span class="keyword">assert</span> context.tests_count &gt;= <span class="number">0</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在features目录运行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">behave</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ behave</div><div class="line">Feature: Showing off behave # features/example.feature:2</div><div class="line"></div><div class="line">  Scenario: Run a simple test          # features/example.feature:4</div><div class="line">    Given we have behave installed     # features/steps/example_steps.py:4</div><div class="line">    When we implement 5 tests          # features/steps/example_steps.py:8</div><div class="line">    Then behave will test them for us! # features/steps/example_steps.py:13</div><div class="line"></div><div class="line">1 feature passed, 0 failed, 0 skipped</div><div class="line">1 scenario passed, 0 failed, 0 skipped</div><div class="line">3 steps passed, 0 failed, 0 skipped, 0 undefined</div></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/selenium/">selenium</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/selenium/">selenium</a><a href="/tags/behave/">behave</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2018/07/03/test/selenium/selenium_behave_hello/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/07/03/test/selenium/selenium_behave_hello/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/07/02/test/selenium/selenium_hello/" title="selenium3.x自动化测试之Hello World" itemprop="url">selenium3.x自动化测试之Hello World</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
+		
+  <p class="article-time">
+    <time datetime="2018-07-02T13:36:09.723Z" itemprop="datePublished"> 发表于 2018-07-02</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="自动化测试工具–selenium"><a href="#自动化测试工具–selenium" class="headerlink" title="自动化测试工具–selenium"></a>自动化测试工具–selenium</h1><blockquote>
+<p><a href="https://www.seleniumhq.org/download/" title="官网" target="_blank" rel="external">官网地址</a></p>
+<p>Selenium [1]  是一个用于Web应用程序测试的工具。Selenium测试直接运行在浏览器中，就像真正的用户在操作一样。支持的浏览器包括IE（7, 8, 9, 10, 11），Mozilla Firefox，Safari，Google Chrome，Opera等。这个工具的主要功能包括：测试与浏览器的兼容性——测试你的应用程序看是否能够很好得工作在不同浏览器和操作系统之上。测试系统功能——创建回归测试检验软件功能和用户需求。支持自动录制动作和自动生成 .Net、Java、Perl等不同语言的测试脚本。—来自百度百科</p>
+</blockquote>
+<h2 id="WebDriver"><a href="#WebDriver" class="headerlink" title="WebDriver"></a>WebDriver</h2><ol>
+<li>W3C组织制定了一套浏览器自动化的规范叫做WebDriver，这套规范规定了所有的浏览器生产商都必须遵守这个规范。其实定义了好多的遵循的接口和WebDriver的概念。对于Chrome，Firefox，Opera，Safari他们都需要遵守这个规范并且实现规范里面的接口，这些实现一般都是伴随浏览器的开发进行的。 <a href="https://github.com/w3c/webdriver" title="https://github.com/w3c/webdriver" target="_blank" rel="external">https://github.com/w3c/webdriver</a></li>
+</ol>
+<h2 id="selenium原理"><a href="#selenium原理" class="headerlink" title="selenium原理"></a>selenium原理</h2><ol>
+<li>selenium封装各个浏览器厂商的WebDriver接口，通过各个语言封装，达到调用浏览器,操控dom的方式实现自动化。</li>
+</ol>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="WebDriver-exe"><a href="#WebDriver-exe" class="headerlink" title="WebDriver.exe"></a>WebDriver.exe</h3><ol>
+<li><a href="https://code.google.com/p/chromedriver/downloads/list" title="chromedriver" target="_blank" rel="external">chromedriver</a></li>
+<li><a href="https://github.com/mozilla/geckodriver/releases/" title="Firefox的驱动geckodriver" target="_blank" rel="external">Firefox的驱动geckodriver</a></li>
+<li><a href="http://www.nuget.org/packages/Selenium.WebDriver.IEDriver/" title="IE的驱动IEdriver" target="_blank" rel="external">IE的驱动IEdriver</a></li>
+</ol>
+<h2 id="python3-x"><a href="#python3-x" class="headerlink" title="python3.x"></a>python3.x</h2><h3 id="安装selenium"><a href="#安装selenium" class="headerlink" title="安装selenium"></a>安装selenium</h3><ol>
+<li>方法一：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install selenium</div></pre></td></tr></table></figure>
+<p>安装完成后查看</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip show selenium</div></pre></td></tr></table></figure>
+<ol>
+<li>方法二：直接下载selenium包：<a href="https://pypi.python.org/pypi/selenium" target="_blank" rel="external">https://pypi.python.org/pypi/selenium</a></li>
+</ol>
+<p>解压后，在解压目录下执行  D:\selenium\selenium3.3.1&gt; python setup.py install 即可安装</p>
+<h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><h2 id="安装selenium-1"><a href="#安装selenium-1" class="headerlink" title="安装selenium"></a>安装selenium</h2><ol>
+<li>下载<a href="https://goo.gl/4g538W" target="_blank" rel="external">selenium-server-standalone-3.13.0.jar</a> 并添加到eclipse或者idea工程环境变量</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;selenium-server&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;3.13.0&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line"></div><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;selenium-java&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;3.13.0&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<h2 id="hello-wold"><a href="#hello-wold" class="headerlink" title="hello wold"></a>hello wold</h2><h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><blockquote>
+<p>打开浏览器输入baidu.com并在搜索框中输入“xxoo”并且点击“搜索”<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</div><div class="line"></div><div class="line"><span class="comment"># chrome = webdriver.Chrome("C:\\Users\\Administrator\\AppData\\Local\\Google\\Chrome\\Application\\chromedriver.exe")</span></div><div class="line">chrome = webdriver.Ie(<span class="string">"D:\\IEDriverServer.exe"</span>)</div><div class="line">chrome.get(<span class="string">"http://www.baidu.com"</span>)</div><div class="line">kw = chrome.find_element_by_id(<span class="string">"kw"</span>)</div><div class="line">kw.send_keys(<span class="string">"xxoo"</span>)</div><div class="line"></div><div class="line">su = chrome.find_element_by_id(<span class="string">"su"</span>)</div><div class="line">su.click()</div><div class="line">chrome.title</div><div class="line">result = chrome.find_element_by_id(<span class="string">"1"</span>)</div><div class="line">result.click()</div><div class="line"></div><div class="line">sleep(<span class="number">5</span>)</div><div class="line">chrome.quit()</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="java-1"><a href="#java-1" class="headerlink" title="java"></a>java</h3><p>略</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/selenium/">selenium</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/selenium/">selenium</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2018/07/02/test/selenium/selenium_hello/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/07/02/test/selenium/selenium_hello/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/04/28/Java/jvm/jvm性能调优工具_JDK图形化性能监控工具/" title="Java 性能调优工具（JDK图形化性能监控工具）" itemprop="url">Java 性能调优工具（JDK图形化性能监控工具）</a>
   </h1>
   <p class="article-author">By
@@ -710,142 +889,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/04/26/markdown_gener_html/" title="maven插件markdown生成html接口文档" itemprop="url">maven插件markdown生成html接口文档</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-26T09:11:26.392Z" itemprop="datePublished"> 发表于 2018-04-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="https://github.com/zvc888/simple-site.git" title="源码github地址" target="_blank" rel="external">源码github地址</a></p>
-<h2 id="web服务器-centos-6-5"><a href="#web服务器-centos-6-5" class="headerlink" title="web服务器 centos 6.5"></a>web服务器 centos 6.5</h2><ol>
-<li>安装scp,unzip</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install unzip  openssh-clients -y</div></pre></td></tr></table></figure>
-<ol>
-<li>安装web服务器 nginx，使用yum安装<br><a href="http://nginx.org/en/linux_packages.html#stable" title="nginx官网" target="_blank" rel="external">nginx官网</a></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[nginx]</div><div class="line">name=nginx repo</div><div class="line">baseurl=http://nginx.org/packages/centos/6/$basearch/</div><div class="line">gpgcheck=0</div><div class="line">enabled=1</div></pre></td></tr></table></figure>
-<ol>
-<li>eclipse 新建maven-archetype-site项目</li>
-</ol>
-<p>附录：<br><a href="https://github.com/kongchen/swagger-maven-plugin.git" title="swagger生成站点" target="_blank" rel="external">swagger生成站点</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/maven/">maven</a>►<a class="article-category-link" href="/categories/maven/markdown/">markdown</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/maven/">maven</a><a href="/tags/markdown/">markdown</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/04/26/markdown_gener_html/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/markdown_gener_html/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/04/26/hello-world/" title="Hello World" itemprop="url">Hello World</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-26T09:11:26.391Z" itemprop="datePublished"> 发表于 2018-04-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/04/26/hello-world/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/hello-world/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -937,6 +980,10 @@
 			<li><a href="/categories/git/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
 		  
 		
+		  
+			<li><a href="/categories/selenium/" title="selenium">selenium<sup>2</sup></a></li>
+		  
+		
 		</ul>
 </div>
 
@@ -975,15 +1022,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+				<li><a href="/tags/selenium/" title="selenium">selenium<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
 			
 		
 			
@@ -999,7 +1046,7 @@
 			
 		
 			
-				<li><a href="/tags/Windows/" title="Windows">Windows<sup>1</sup></a></li>
+				<li><a href="/tags/behave/" title="behave">behave<sup>1</sup></a></li>
 			
 		
 			
@@ -1011,7 +1058,15 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
+				<li><a href="/tags/Windows/" title="Windows">Windows<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
 			
 		
 		</ul>
