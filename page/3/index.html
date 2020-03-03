@@ -45,7 +45,7 @@
 			
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="hang on, that&#39;s right">hang on, that&#39;s right</a></h1>
-				<h2 class="blog-motto">blog</h2>
+				<h2 class="blog-motto">梦想还是要有的，万一实现了呢？</h2>
 			</div>
 			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
@@ -61,7 +61,7 @@
  					
 						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
 							<label>Search</label>
-						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						<input name="s" type="hidden" value= 3697448111733862400 ><input type="text" name="q" size="30" placeholder="搜索"><br>
 						</form>
 					
 					</li>
@@ -71,68 +71,6 @@
     </header>
     <div id="container">
       <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/04/26/Java/feign_ribbon负载均衡/" title="feign,ribbon 负载均衡策略" itemprop="url">feign,ribbon 负载均衡策略</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-26T09:11:26.347Z" itemprop="datePublished"> 发表于 2018-04-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="bean-配置"><a href="#bean-配置" class="headerlink" title="bean 配置"></a>bean 配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class AppFeignClientConfiguration &#123;</div><div class="line">    /**</div><div class="line">     * 负载均衡策略</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    @Bean</div><div class="line">    public IRule ribbonRule() &#123;</div><div class="line">//        return new BestAvailableRule(); //选择一个最小的并发请求的server</div><div class="line">//        return new WeightedResponseTimeRule(); //根据相应时间分配一个weight，相应时间越长，weight越小，被选中的可能性越低。</div><div class="line">//        return new RetryRule(); //对选定的负载均衡策略机上重试机制。</div><div class="line">//        return new RoundRobinRule(); //roundRobin方式轮询选择server</div><div class="line">//        return new RandomRule(); //随机选择一个server</div><div class="line">//        return new ZoneAvoidanceRule(); //复合判断server所在区域的性能和server的可用性选择server</div><div class="line">        return new AvailabilityFilteringRule();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/nginx/">nginx</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/nginx/">nginx</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/04/26/Java/feign_ribbon负载均衡/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Java/feign_ribbon负载均衡/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
 
    
     
@@ -199,6 +137,68 @@
 	
 	  	<span></span>
 		<a href="/2018/04/26/Java/durid_encrypt_config/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Java/durid_encrypt_config/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/26/Java/feign_ribbon负载均衡/" title="feign,ribbon 负载均衡策略" itemprop="url">feign,ribbon 负载均衡策略</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zvc" target="_blank" itemprop="author">zvc</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-26T09:11:26.347Z" itemprop="datePublished"> 发表于 2018-04-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="bean-配置"><a href="#bean-配置" class="headerlink" title="bean 配置"></a>bean 配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class AppFeignClientConfiguration &#123;</div><div class="line">    /**</div><div class="line">     * 负载均衡策略</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    @Bean</div><div class="line">    public IRule ribbonRule() &#123;</div><div class="line">//        return new BestAvailableRule(); //选择一个最小的并发请求的server</div><div class="line">//        return new WeightedResponseTimeRule(); //根据相应时间分配一个weight，相应时间越长，weight越小，被选中的可能性越低。</div><div class="line">//        return new RetryRule(); //对选定的负载均衡策略机上重试机制。</div><div class="line">//        return new RoundRobinRule(); //roundRobin方式轮询选择server</div><div class="line">//        return new RandomRule(); //随机选择一个server</div><div class="line">//        return new ZoneAvoidanceRule(); //复合判断server所在区域的性能和server的可用性选择server</div><div class="line">        return new AvailabilityFilteringRule();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/nginx/">nginx</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/nginx/">nginx</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2018/04/26/Java/feign_ribbon负载均衡/#comments" class="ds-thread-count comments-count-link" data-thread-key="2018/04/26/Java/feign_ribbon负载均衡/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -933,15 +933,15 @@
 			
 		
 			
-				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
 			
 		
 			
@@ -1120,7 +1120,7 @@ $(document).ready(function(){
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?5a1ba66682e986b4aadbcbefaa91715c";
+  hm.src = "//hm.baidu.com/hm.js?9ceebbcbaab5e6901b1dd49bd1d4fa8b";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
